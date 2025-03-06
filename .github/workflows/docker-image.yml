@@ -12,6 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
       
@@ -24,7 +26,8 @@ jobs:
         outputs: type=local,dest=/tmp/build
         build-args: |
           PULL_PASSWORD=${{ secrets.PULL_PASSWORD }}
-            
+       
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
@@ -61,6 +64,7 @@ jobs:
         target: cis-map
         load: true
         push: true
+        platforms: linux/amd64,linux/arm64  
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/cis-map:${{ github.sha }}
           ${{ secrets.DOCKER_USERNAME }}/cis-map:latest
@@ -95,6 +99,7 @@ jobs:
         target: cis-k8s
         load: true
         push: true
+        platforms: linux/amd64,linux/arm64  
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/cis-k8s:${{ github.sha }}
           ${{ secrets.DOCKER_USERNAME }}/cis-k8s:latest
@@ -123,3 +128,13 @@ jobs:
         
     - name: Build and push cis-server
       uses: docker/build-push-action
+      with:
+        context: .
+        file: ./Dockerfile
+        target: cis-server
+        load: true
+        push: true
+        platforms: linux/amd64,linux/arm64  
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/cis-server:${{ github.sha }}
+          ${{ secrets.DOCKER_USERNAME }}/cis-server:latest

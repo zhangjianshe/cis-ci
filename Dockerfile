@@ -12,17 +12,17 @@ RUN git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d4481
    && cd cis \
    && bash build.sh 
    
-FROM mapway/gdal-base:2.0
+FROM mapway/gdal-base:2.0 as cis-map
 WORKDIR /app
 COPY --from=builder /worker/cis-map/target/cis-map-1.0.0.jar app.jar
 CMD ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 
-FROM mapway/gdal-base:2.0
+FROM mapway/gdal-base:2.0 as cis-k8s
 WORKDIR /app
 COPY --from=builder /worker/cis-k8s/target/cis-k8s-1.0.0.jar app.jar
 CMD ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 
-FROM mapway/gdal-base:2.0
+FROM mapway/gdal-base:2.0 as cis-server
 WORKDIR /app
 COPY --from=builder /worker/cis-server/target/cis-server-1.0.0.jar app.jar
 CMD ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "app.jar"]
