@@ -27,4 +27,6 @@ WORKDIR /app
 COPY --from=builder /worker/cis-server/target/cis-server-1.0.0.jar app.jar
 CMD ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 
+
+
      
