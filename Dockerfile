@@ -10,7 +10,7 @@ RUN  git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d448
      && mvn clean package install -Dmaven.test.skip=true \
      && cd ..  \
      && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/cis.git  \
-     && cd cis && chmmod +x build.sh\
+     && cd cis && chmod +x build.sh\
      && ./build.sh \
      && cd.. 
    
