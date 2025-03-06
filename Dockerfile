@@ -6,7 +6,7 @@ RUN  . ~/.bashrc \
      && cd biz-common \
      && mvn clean package install -Dmaven.test.skip=true \
      && cd ..  \
-     && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/cis-im.git  \
+     && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/satway/cis-im.git \
      && cd cis-im \
      && mvn clean package install -Dmaven.test.skip=true \
      && cd ..  \
