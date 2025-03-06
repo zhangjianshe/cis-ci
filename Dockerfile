@@ -1,5 +1,6 @@
 FROM mapway/builder:2.0 as builder
 WORKDIR /worker
+ARG PULL_PASSWORD
 RUN git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/mapway-gwt-suit.git  \
    && cd mapway-gwt-suit \
    && mvn clean package install -Dmaven.test.skip=true \
