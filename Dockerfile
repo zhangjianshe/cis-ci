@@ -4,15 +4,15 @@ ARG PULL_PASSWORD
 RUN  . ~/.bashrc \
      && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/biz-common.git  \
      && cd biz-common \
-     && mvn clean package install -Dmaven.test.skip=true \
+     && mvn clean package install -Dmaven.test.skip=true -ntp \
      && cd ..  \
      && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/satway/cis-im.git \
      && cd cis-im \
-     && mvn clean package install -Dmaven.test.skip=true \
+     && chmod +x ./im && ./im package \
      && cd ..  \
      && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/mapway-gwt-suit.git  \
      && cd mapway-gwt-suit \
-     && mvn clean package install -Dmaven.test.skip=true \
+     && mvn clean package install -Dmaven.test.skip=true -ntp \
      && cd ..  \
      && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/cis.git  \
      && cd cis && chmod +x ./build.sh 
