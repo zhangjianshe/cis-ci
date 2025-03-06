@@ -17,7 +17,7 @@ RUN  . ~/.bashrc \
      && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/cis.git  \
      && cd cis && chmod +x ./build.sh 
 RUN  cd /worker/cis && ./build.sh  
-
+ 
 
 
 FROM mapway/gdal-base:2.0 as cis-map
