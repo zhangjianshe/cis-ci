@@ -1,17 +1,18 @@
 FROM mapway/builder:2.0 as builder
 WORKDIR /worker
 ARG PULL_PASSWORD
-RUN git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/mapway-gwt-suit.git  \
-   && cd mapway-gwt-suit \
-   && mvn clean package install -Dmaven.test.skip=true \
-   && cd ..  \
-   && git clone https://zhangjianshe:$PULL_PASSWORD@https://codeup.aliyun.com/60a6145d44816b8ed2332594/biz-common.git  \
-   && cd biz-common \
-   && mvn clean package install -Dmaven.test.skip=true \
-   && cd ..  \
-   && git clone https://zhangjianshe:$PULL_PASSWORD@https://codeup.aliyun.com/60a6145d44816b8ed2332594/cis.git  \
-   && cd cis \
-   && bash build.sh 
+RUN  git clone https://zhangjianshe:$PULL_PASSWORD@https://codeup.aliyun.com/60a6145d44816b8ed2332594/biz-common.git  \
+     && cd biz-common \
+     && mvn clean package install -Dmaven.test.skip=true \
+     && cd ..  \
+     && git clone https://zhangjianshe:$PULL_PASSWORD@codeup.aliyun.com/60a6145d44816b8ed2332594/mapway-gwt-suit.git  \
+     && cd mapway-gwt-suit \
+     && mvn clean package install -Dmaven.test.skip=true \
+     && cd ..  \
+     && git clone https://zhangjianshe:$PULL_PASSWORD@https://codeup.aliyun.com/60a6145d44816b8ed2332594/cis.git  \
+     && cd cis && chmmod+c build.sh\
+     && ./build.sh \
+     && cd.. 
    
 FROM mapway/gdal-base:2.0 as cis-map
 WORKDIR /app
