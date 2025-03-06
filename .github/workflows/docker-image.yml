@@ -127,7 +127,7 @@ jobs:
         path: /tmp/build
         
     - name: Build and push cis-server
-      uses: docker/build-push-action
+      uses: docker/build-push-action@v2
       with:
         context: .
         file: ./Dockerfile
