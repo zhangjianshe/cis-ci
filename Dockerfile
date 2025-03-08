@@ -1,4 +1,4 @@
-FROM mapway/builder:3.0 as builder
+FROM ghcr.io/zhangjianshe/builder:4.0 as builder
 WORKDIR /worker
 ARG PULL_PASSWORD
 RUN  . ~/.bashrc \
@@ -21,17 +21,17 @@ RUN  cd /worker/cis && ./build.sh
  
 
 
-FROM mapway/gdal-base:3.0 as cis-map
+FROM ghcr.io/zhangjianshe/gdal-base:3.0 as cis-map
 WORKDIR /app
 COPY --from=builder /worker/cis/cis-map/target/cis-map-1.0.0.jar app.jar
 CMD ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 
-FROM mapway/gdal-base:3.0 as cis-k8s
+FROM ghcr.io/zhangjianshe/gdal-base:3.0 as cis-k8s
 WORKDIR /app
 COPY --from=builder /worker/cis/cis-k8s/target/cis-k8s-1.0.0.jar app.jar
 CMD ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "app.jar"]
 
-FROM mapway/gdal-base:3.0 as cis-server  
+FROM ghcr.io/zhangjianshe/gdal-base:3.0 as cis-server  
 WORKDIR /app
 COPY --from=builder /worker/cis/cis-server/target/cis-server-1.0.0.jar app.jar
 CMD ["java","-XX:+UnlockExperimentalVMOptions", "-XX:+UseContainerSupport", "-jar", "app.jar"]
